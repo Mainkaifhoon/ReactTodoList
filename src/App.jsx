@@ -37,7 +37,7 @@ const [task, setTask] = useState(() => {
   return (
     <div className="h-screen bg-black">
       <header className="">
-        <h1 className="bg-yellow-500 px-4 py-4 leading-[0.9] text-4xl flex items-end justify-center gap-2">
+        <h1 className="bg-yellow-100 px-4 py-4 leading-[0.9] text-4xl flex items-end justify-center gap-2">
           <SquareCheck /> Todo
         </h1>
       </header>
