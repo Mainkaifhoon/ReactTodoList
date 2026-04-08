@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { SquareCheck } from "lucide-react";
 import { Plus } from "lucide-react";
+import clickSound from "./ClickAudio/click.wav";
+import deleteSound from "./ClickAudio/deleteClick.wav";
 
 const App = () => {
+
+  const clickAudio= new Audio(clickSound)
+  const deleteAudio = new Audio(deleteSound)
+
   const [value, setvalue] = useState("");
-const [task, setTask] = useState(() => {
-  const data = localStorage.getItem("task");
-  return data ? JSON.parse(data) : [];
-}); 
-
-
+  const [task, setTask] = useState(() => {
+    const data = localStorage.getItem("task");
+    return data ? JSON.parse(data) : [];
+  });
 
   useEffect(() => {
-      localStorage.setItem("task", JSON.stringify(task));
+    localStorage.setItem("task", JSON.stringify(task));
   }, [task]);
 
   function removeTasks(idx) {
@@ -36,6 +40,7 @@ const [task, setTask] = useState(() => {
 
   return (
     <div className="h-screen bg-black">
+
       <header className="">
         <h1 className="bg-yellow-100 px-4 py-4 leading-[0.9] text-4xl flex items-end justify-center gap-2">
           <SquareCheck /> Todo
@@ -51,6 +56,7 @@ const [task, setTask] = useState(() => {
             if (e.key === "Enter") {
               if (value.trim()) {
                 renderTasks();
+                clickAudio.play()
               }
             }
           }}
@@ -61,8 +67,10 @@ const [task, setTask] = useState(() => {
         />
         <button
           onClick={() => {
+
             if (value.trim()) {
               renderTasks();
+              clickAudio.play()
             }
           }}
           className=" hover:bg-yellow-500 cursor-pointer active:scale-95 active:bg-yellow-600 border-2 px-3 bg-amber-300 border-none py-1 "
@@ -96,6 +104,7 @@ const [task, setTask] = useState(() => {
               <button
                 onClick={(e) => {
                   removeTasks(idx);
+                  deleteAudio.play()
                 }}
                 className="px-2 py-1 bg-red-500 border-2 border-red-500 rounded-xl text-sm hover:cursor-pointer active:scale-95"
               >
